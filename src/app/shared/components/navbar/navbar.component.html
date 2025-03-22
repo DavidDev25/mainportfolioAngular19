@@ -2,7 +2,8 @@
     <div [innerHTML]="svgService.getSVG('dwLogo')"></div>
     @for (link of navLinks; track link.path) {
     <div class="navWrapper">
-        <a [className]="link.label " routerLinkActive="active" [routerLinkActiveOptions]="{exact: link.path === 'home'}"
+        <a [className]="link.label " routerLinkActive="active"
+            [routerLinkActiveOptions]="link.label == 'home' ? { exact: link.path === 'link.label' || link.path === '' } : { exact: link.path === link.label }"
             [routerLink]="link.path">{{link.label}}</a>
     </div>
     }

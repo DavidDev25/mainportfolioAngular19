@@ -13,9 +13,9 @@ export class NavbarComponent {
 
   navLinks = [
     { label: 'Home', path: '/home' },
-    { label: 'AboutMe', path: 'pages/aboutMe' },
-    { label: 'Imprint', path: 'pages/Skills' },
-    { label: 'Projects', path: 'pages/projects' },
-    { label: 'Contact', path: 'pages/contact-me' },
+    { label: 'About Me', path: '/about-me' },
+    { label: 'Skill', path: '/skills' },
+    { label: 'Projects', path: '/projects' },
+    { label: 'Contact', path: '/contact-me' },
   ];
 }
