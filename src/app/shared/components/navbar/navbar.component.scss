@@ -1,0 +1,18 @@
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  .navWrapper {
+    > a {
+      text-decoration: none;
+      color: #333333;
+      font-size: 24px;
+    }
+
+    &.active {
+      background-color: red;
+      color: #007bff;
+      font-weight: bold;
+    }
+  }
+}
