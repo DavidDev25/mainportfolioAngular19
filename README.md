@@ -28,8 +28,26 @@ Dieses Portfolio demonstriert mehrere hochmoderne Angular 19-Features und -Konze
 
 Die Anwendung folgt einer Feature-basierten Organisation:
 
-src/ ├── app/ │ ├── pages/ # Hauptkomponenten für Features │ │ ├── home/ │ │ ├── about-me/ │ │ ├── skills/ │ │ ├── projects/ │ │ └── contact-me/ │ ├── shared/ # Geteilte Komponenten und Services │ │ ├── components/ │ │ │ └── navbar/
-│ │ └── services/ │ │ ├── scroll.service.ts │ │ └── theme.service.ts │ ├── svg.service.ts # SVG-Handling-Service │ ├── app.component.ts # Root-Komponente mit Theme-Switching │ └── app.routes.ts # Anwendungsrouting └── styles.scss # Globale Stile und Theme-Definitionen
+```
+src/
+├── app/
+│   ├── pages/                  # Hauptkomponenten für Features
+│   │   ├── home/
+│   │   ├── about-me/
+│   │   ├── skills/
+│   │   ├── projects/
+│   │   └── contact-me/
+│   ├── shared/                 # Geteilte Komponenten und Services
+│   │   ├── components/
+│   │   │   └── navbar/         
+│   │   └── services/
+│   │       ├── scroll.service.ts
+│   │       └── theme.service.ts
+│   ├── svg.service.ts          # SVG-Handling-Service
+│   ├── app.component.ts        # Root-Komponente mit Theme-Switching
+│   └── app.routes.ts           # Anwendungsrouting
+└── styles.scss                 # Globale Stile und Theme-Definitionen
+```
 
 ## Zentrale technische Implementierungen
 
@@ -54,17 +72,33 @@ export class ThemeService {
 }
 ```
 
-### Navbar-Komponente
+### Moderne Dependency Injection
 
 ```typescript
 export class NavbarComponent {
   private scrollService = inject(ScrollService);
   public svgService = inject(SvgService);
   protected themeService = inject(ThemeService);
-    
+  
   // Komponenten-Logik...
 }
+```
 
+### Automatisches Unsubscribe für RxJS-Streams
+
+```typescript
+constructor() {
+  this.scrollService.activeSection$
+    .pipe(takeUntilDestroyed())
+    .subscribe(section => {
+      this.activeSection = section;
+    });
+}
+```
+
+### Moderne Template-Syntax
+
+```html
 @for (link of navLinks; track link.sectionId) {
   <div class="navWrapper">
     @if (link.label.toLowerCase() === 'contact') {
@@ -75,13 +109,17 @@ export class NavbarComponent {
   </div>
 }
 ```
-Entwicklung
-Voraussetzungen
-Node.js (v18+)
-npm/yarn
 
+## Entwicklung
 
-# Setup
+### Voraussetzungen
+
+- Node.js (v18+)
+- npm/yarn
+
+### Setup
+
+```bash
 # Repository klonen
 git clone https://github.com/yourusername/portfolio.git
 
@@ -91,18 +129,11 @@ npm install
 
 # Entwicklungsserver starten
 npm start
+```
 
-Besuche http://localhost:4200/, um die Anwendung in Aktion zu sehen
+Besuche `http://localhost:4200/`, um die Anwendung in Aktion zu sehen.
 
-Lizenz
-MIT
+## Lizenz
 
-Folge diesen Schritten, um die Datei zu ersetzen:
-
-1. Kopiere den gesamten Code-Block oben
-2. Öffne Visual Studio Code
-3. Navigiere zum Hauptverzeichnis deines Projekts (`dein Pfad des Projektes`)
-4. Falls bereits eine README.md existiert, öffne diese und ersetze den gesamten Inhalt durch den kopierten Text
-5. Falls keine README.md existiert, erstelle eine neue Datei mit dem Namen "README.md" und füge den Text ein
-6. Speichere die Datei
+[MIT](LICENSE)
 
