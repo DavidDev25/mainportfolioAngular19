@@ -1,0 +1,24 @@
+.profileImage-container img{
+    width: 200px;
+    height: 200px;
+}
+
+// SVG-Größe kontrollieren
+.github-icon {
+    width: 40px; // Passe die Größe an
+    height: 40px; 
+    display: inline-block;
+}
+
+.linkedin-icon {
+    width: 35px; // Passe die Größe an
+    height: 35px;
+    display: inline-block;
+}
+
+// Container für die Icons
+.svg-container {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px;
+}
