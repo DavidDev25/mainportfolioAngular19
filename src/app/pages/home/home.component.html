@@ -9,10 +9,33 @@
     <div class="home__socials">
       @for (social of socialLinks; track social.name) {
         <a [ngClass]="{'dark-home': themeService.isDarkTheme()}" [href]="social.url" target="_blank" class="social-button" [attr.aria-label]="social.name">
-          <span class="svg-container"  [class]="social.iconName?.toLowerCase() + '-icon'" [innerHTML]="getSvgIcon(social.iconName ?? '')"></span>
+          <span class="svg-container" [class]="social.iconName?.toLowerCase() + '-icon'" [innerHTML]="getSvgIcon(social.iconName ?? '')"></span>
           <span class="social-name">{{ social.name }}</span>
         </a>
       }
+      
+      <!-- Download Button direkt als social-button -->
+      <button class="social-button" (click)="toggleDownloadDropdown()" [ngClass]="{'active': isDownloadDropdownOpen, 'dark-home': themeService.isDarkTheme()}">
+        <span class="svg-container download-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="currentColor">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+          </svg>
+        </span>
+        <span class="social-name">Lebenslauf</span>
+      </button>
+      
+      <!-- Dropdown-Menü separat außerhalb des Buttons -->
+      <div class="dropdown-menu" [class.show]="isDownloadDropdownOpen" [ngClass]="{'dark-home': themeService.isDarkTheme()}">
+        @for (download of downloadLabels; track download.name) {
+          <a [href]="download.url" 
+             [ngClass]="{'dark-home': themeService.isDarkTheme()}" 
+             class="dropdown-item" 
+             [attr.aria-label]="download.name">
+            <span class="download-name">{{ download.name }}</span>
+          </a>
+        }
+      </div>
     </div>
   </div>
   
