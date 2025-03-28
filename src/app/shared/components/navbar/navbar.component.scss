@@ -16,7 +16,7 @@
   .nav-links-container {
     display: flex;
     align-items: center;
-    margin-right: 2rem; /* Add space between last label and edge of the website */
+    margin-right: 2rem;
   }
   
   .navWrapper {
@@ -27,7 +27,7 @@
 
       &.active {
         color: #007bff;
-        background-color: transparent; // Remove the red background
+        background-color: transparent;
       }
     }
     
@@ -46,10 +46,8 @@
       
       &.active {
         background-color: #0056b3;
-        color: white; // Keep text white when active
-
-        // This overrides the default active styling
-      }
+        color: white; 
+       }
     }
     
     margin-left: 5rem;
