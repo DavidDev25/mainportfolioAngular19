@@ -1,7 +1,11 @@
 nav, .navbar {
-  background-color: #ffffff; // oder welche Farbe die Navbar vorher hatte
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1000; // Stellt sicher, dass die Navbar über anderen Elementen liegt
+  z-index: 1000;
 }
 
 .navbar {
@@ -17,12 +21,13 @@ nav, .navbar {
     margin-right: auto;
     margin-left: 2rem;
     align-self: center;
+    fill: #007bff;
   }
 
   .nav-links-container {
     display: flex;
     align-items: center;
-    margin-right: 2rem;
+    margin-right: 3.5rem;
   }
   
   .navWrapper {
@@ -30,10 +35,19 @@ nav, .navbar {
       text-decoration: none;
       color: #333333;
       font-size: 24px;
+      cursor: pointer;
+      padding: 5px 8px;
+      transition: color 0.3s ease;
+      
+      &:hover {
+        color: #007bff;
+      }
 
       &.active {
         color: #007bff;
         background-color: transparent;
+        font-weight: bold;
+        border-bottom: 2px solid #007bff;
       }
     }
     
@@ -44,6 +58,7 @@ nav, .navbar {
       border-radius: 4px;
       text-decoration: none;
       font-size: 20px;
+      cursor: pointer;
       transition: background-color 0.3s ease;
       
       &:hover {
@@ -53,9 +68,9 @@ nav, .navbar {
       &.active {
         background-color: #0056b3;
         color: white; 
-       }
+      }
     }
     
-    margin-left: 5rem;
+    margin-left: 1.5rem;
   }
 }
