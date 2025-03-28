@@ -1,14 +1,16 @@
-<nav class="navbar">
-    <div class="dwLogo" [innerHTML]="svgService.getSVG('dwLogo')"></div>
+<nav class="navbar" [ngClass]="{'dark-navbar': themeService.isDarkTheme()}">
+    <div class="dwLogo" [ngClass]="{'dark-logo': themeService.isDarkTheme()}" [innerHTML]="svgService.getSVG('dwLogo')"></div>
     <div class="nav-links-container">
         @for (link of navLinks; track link.sectionId) {
         <div class="navWrapper">
             @if (link.label.toLowerCase() === 'contact') {
                 <a class="contact-button" 
                    [class.active]="isActive(link.sectionId)"
+                   [class.dark-button]="themeService.isDarkTheme()"
                    (click)="scrollToSection(link.sectionId)">Contact Me</a>
             } @else {
                 <a [class.active]="isActive(link.sectionId)"
+                   [class.dark-text]="themeService.isDarkTheme()"
                    (click)="scrollToSection(link.sectionId)">{{link.label}}</a>
             }
         </div>

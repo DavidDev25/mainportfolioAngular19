@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { SvgService } from '../../../svg.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ScrollService } from '../../services/scroll.service';
-import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { ThemeService } from '../../services/theme.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-navbar',
@@ -12,9 +13,14 @@ import { Subscription } from 'rxjs';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit {
+  // Moderne Dependency Injection mit inject()
+  private scrollService = inject(ScrollService);
+  public svgService = inject(SvgService);
+  public sanitizer = inject(DomSanitizer);
+  protected themeService = inject(ThemeService);
+  
   activeSection = 'home';
-  private subscription: Subscription = new Subscription();
 
   navLinks = [
     { label: 'Home', sectionId: 'home' },
@@ -24,24 +30,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
     { label: 'Contact', sectionId: 'contact-me' },
   ];
 
-  constructor(
-    public svgService: SvgService, 
-    public sanitizer: DomSanitizer,
-    private scrollService: ScrollService
-  ) {}
+  constructor() {
+    // Verbesserte Subscription-Verwaltung mit takeUntilDestroyed
+    this.scrollService.activeSection$
+      .pipe(takeUntilDestroyed())
+      .subscribe(section => {
+        this.activeSection = section;
+      });
+  }
 
   ngOnInit(): void {
     setTimeout(() => {
       this.scrollService.initScrollObserver();
     }, 500);
-
-    this.subscription = this.scrollService.activeSection$.subscribe(section => {
-      this.activeSection = section;
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 
   scrollToSection(sectionId: string): void {

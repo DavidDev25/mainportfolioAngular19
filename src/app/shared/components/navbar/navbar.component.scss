@@ -3,41 +3,61 @@ nav, .navbar {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  transition: all 0.3s ease;
 }
 
+// Basis-Navbar-Stil (helles Theme)
 .navbar {
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: flex-start;
   align-items: center;
   padding: 1rem;
   
-  .dwLogo{
+  // Dark theme Variante
+  &.dark-navbar {
+    background-color: rgba(30, 30, 45, 0.9);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  // Logo-Styling
+  .dwLogo {
     display: flex;
     width: 50px;
     height: 50px;
     margin-right: auto;
     margin-left: 2rem;
     align-self: center;
-    fill: #007bff;
+    fill: #007bff; // Blau im hellen Theme
+    transition: fill 0.3s ease;
+    
+    &.dark-logo {
+      fill: #5caaff; // Helleres Blau im dunklen Theme
+    }
   }
 
+  // Container für Nav-Links
   .nav-links-container {
     display: flex;
     align-items: center;
     margin-right: 3.5rem;
   }
   
+  // Einzelner Nav-Link-Wrapper
   .navWrapper {
+    margin-left: 1.5rem;
+    
+    // Standard-Links
     > a {
       text-decoration: none;
-      color: #333333;
+      color: #333333; // Dunkel im hellen Theme
       font-size: 24px;
       cursor: pointer;
       padding: 5px 8px;
-      transition: color 0.3s ease;
+      margin-left: 1.5rem;
+      transition: all 0.3s ease;
       
       &:hover {
         color: #007bff;
@@ -49,8 +69,23 @@ nav, .navbar {
         font-weight: bold;
         border-bottom: 2px solid #007bff;
       }
+      
+      // Dark Theme Variante für Links
+      &.dark-text {
+        color: #f0f0f0; // Hell im dunklen Theme
+        
+        &:hover {
+          color: #5caaff;
+        }
+        
+        &.active {
+          color: #5caaff;
+          border-bottom: 2px solid #5caaff;
+        }
+      }
     }
     
+    // Contact Button spezielles Styling
     .contact-button {
       background-color: #007bff;
       color: white;
@@ -59,7 +94,7 @@ nav, .navbar {
       text-decoration: none;
       font-size: 20px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: all 0.3s ease;
       
       &:hover {
         background-color: #0056b3;
@@ -69,8 +104,52 @@ nav, .navbar {
         background-color: #0056b3;
         color: white; 
       }
+      
+      // Dark Theme Variante für Contact Button
+      &.dark-button {
+        background-color: #5caaff;
+        
+        &:hover {
+          background-color: #3d8be0;
+        }
+        
+        &.active {
+          background-color: #3d8be0;
+        }
+      }
+    }
+  }
+}
+
+// Responsive Design für mobile Geräte
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 0.5rem;
+    
+    .dwLogo {
+      margin: 0.5rem auto;
     }
     
-    margin-left: 1.5rem;
+    .nav-links-container {
+      width: 100%;
+      justify-content: center;
+      margin-right: 0;
+      flex-wrap: wrap;
+    }
+    
+    .navWrapper {
+      margin: 0.3rem;
+      
+      > a {
+        font-size: 18px;
+        margin-left: 0.5rem;
+      }
+      
+      .contact-button {
+        font-size: 16px;
+        padding: 6px 12px;
+      }
+    }
   }
 }
