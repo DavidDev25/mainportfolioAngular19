@@ -74,7 +74,7 @@ export class NavbarComponent {
     }
   </div>
 }
-
+```
 Entwicklung
 Voraussetzungen
 Node.js (v18+)
