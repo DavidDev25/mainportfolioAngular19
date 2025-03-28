@@ -95,3 +95,37 @@
     align-items: center;
     margin-right: 10px;
 }
+
+.dark-home {
+  background: linear-gradient(135deg, #1e1e2d 0%, #2c2c3a 100%);
+  color: #f0f0f0;
+
+  .home__title, .home__subtitle, .home__description {
+    color: #f0f0f0;
+  }
+
+  .social-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid #444;
+    color: #f0f0f0;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  .profileImage-container img {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .home__socials{
+    background-color: #1e1e2d;
+    .social-name{
+      color: white;
+    }
+  }
+
+  .github-icon {
+    fill: #f0f0f0;
+  }
+}

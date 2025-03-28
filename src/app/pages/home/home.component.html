@@ -1,4 +1,4 @@
-<section class="home">
+<section class="home" [ngClass]="{'dark-home': themeService.isDarkTheme()}">
   <div class="home__content">
     <h1 class="home__title">{{ title }}</h1>
     <p class="home__subtitle">{{ subtitle }}</p>
@@ -8,8 +8,8 @@
     
     <div class="home__socials">
       @for (social of socialLinks; track social.name) {
-        <a [href]="social.url" target="_blank" class="social-button" [attr.aria-label]="social.name">
-          <span class="svg-container" [class]="social.iconName?.toLowerCase() + '-icon'" [innerHTML]="getSvgIcon(social.iconName ?? '')"></span>
+        <a [ngClass]="{'dark-home': themeService.isDarkTheme()}" [href]="social.url" target="_blank" class="social-button" [attr.aria-label]="social.name">
+          <span class="svg-container"  [class]="social.iconName?.toLowerCase() + '-icon'" [innerHTML]="getSvgIcon(social.iconName ?? '')"></span>
           <span class="social-name">{{ social.name }}</span>
         </a>
       }

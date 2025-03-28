@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { SvgService } from '../../svg.service';
 import { SafeHtml } from '@angular/platform-browser'; 
+import { ThemeService } from '../../shared/services/theme.service'; // ThemeService importieren
 
 // Interface für Social Links definieren
 interface SocialLink {
@@ -12,12 +14,13 @@ interface SocialLink {
 @Component({
   selector: 'app-home',
   standalone: true, 
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
   private svgService = inject(SvgService);
+  protected themeService = inject(ThemeService); // ThemeService hinzufügen
 
   title = 'David Werner';
   subtitle = 'Junior Web Developer';
