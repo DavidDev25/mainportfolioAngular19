@@ -33,7 +33,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     setTimeout(() => {
       this.scrollService.initScrollObserver();
-    }, 300);
+    }, 500);
 
     this.subscription = this.scrollService.activeSection$.subscribe(section => {
       this.activeSection = section;
@@ -48,7 +48,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
     }
   }
 
