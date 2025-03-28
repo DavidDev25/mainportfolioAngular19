@@ -6,18 +6,17 @@ import { SafeHtml } from '@angular/platform-browser';
 interface SocialLink {
   name: string;
   url: string;
-  iconName?: string; // Optional für Icons
+  iconName?: string;
 }
 
 @Component({
   selector: 'app-home',
-  standalone: true, // In Angular 19 sollte dies standalone sein
+  standalone: true, 
   imports: [],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  // Korrektur der SVG Service Injection
   private svgService = inject(SvgService);
 
   title = 'David Werner';
@@ -30,7 +29,7 @@ export class HomeComponent {
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/david-werner-01a88032a/', iconName: 'LinkedIn' }
   ];
   
-  // Methode zum Abrufen der SVG-Icons (angepasst an den tatsächlichen Methodennamen im Service)
+
   getSvgIcon(iconName: string): SafeHtml {
     return this.svgService.getSVG(iconName);
   }
