@@ -1,0 +1,9 @@
+section {
+  min-height: 100vh;
+  scroll-margin-top: 80px; // Adjust based on your navbar height
+  padding: 80px 20px 20px; // Top padding to account for the fixed navbar
+  box-sizing: border-box; // Ensure padding is included in height calculation
+  display: flex;
+  flex-direction: column;
+  justify-content: center; // Center content vertically in each section
+}
