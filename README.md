@@ -80,8 +80,8 @@ Voraussetzungen
 Node.js (v18+)
 npm/yarn
 
-Setup
 
+Setup
 # Repository klonen
 git clone https://github.com/yourusername/portfolio.git
 
