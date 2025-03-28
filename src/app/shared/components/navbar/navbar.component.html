@@ -1,10 +1,16 @@
 <nav class="navbar">
-    <div [innerHTML]="svgService.getSVG('dwLogo')"></div>
-    @for (link of navLinks; track link.path) {
-    <div class="navWrapper">
-        <a [className]="link.label " routerLinkActive="active"
-            [routerLinkActiveOptions]="link.label == 'home' ? { exact: link.path === 'link.label' || link.path === '' } : { exact: link.path === link.label }"
-            [routerLink]="link.path">{{link.label}}</a>
+    <div class="dwLogo" [innerHTML]="svgService.getSVG('dwLogo')"></div>
+    <div class="nav-links-container">
+        @for (link of navLinks; track link.path) {
+        <div class="navWrapper">
+            @if (link.label.toLowerCase() === 'contact') {
+                <a class="contact-button" routerLinkActive="active" [routerLink]="link.path">Contact Me</a>
+            } @else {
+                <a [className]="link.label" routerLinkActive="active"
+                   [routerLinkActiveOptions]="link.label == 'home' ? { exact: link.path === 'link.label' || link.path === '' } : { exact: link.path === link.label }"
+                   [routerLink]="link.path">{{link.label}}</a>
+            }
+        </div>
+        }
     </div>
-    }
 </nav>
