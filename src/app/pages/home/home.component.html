@@ -1,12 +1,12 @@
-<section class="hero">
-  <div class="hero__content">
-    <h1 class="hero__title">{{ title }}</h1>
-    <p class="hero__subtitle">{{ subtitle }}</p>
-    <div class="hero__description">
+<section class="home">
+  <div class="home__content">
+    <h1 class="home__title">{{ title }}</h1>
+    <p class="home__subtitle">{{ subtitle }}</p>
+    <div class="home__description">
       <p>{{ description }}</p>
     </div>
     
-    <div class="hero__socials">
+    <div class="home__socials">
       @for (social of socialLinks; track social.name) {
         <a [href]="social.url" target="_blank" class="social-button" [attr.aria-label]="social.name">
           <span class="svg-container" [class]="social.iconName?.toLowerCase() + '-icon'" [innerHTML]="getSvgIcon(social.iconName ?? '')"></span>

@@ -1,22 +1,92 @@
-.profileImage-container img{
-    width: 200px;
-    height: 200px;
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 4rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
-// SVG-Größe kontrollieren
+.home__content {
+  flex: 1;
+}
+
+.home__title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.home__subtitle {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.home__description {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.home__socials {
+  display: flex;
+  gap: 0;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid #e8e8e8;
+  display: inline-flex;
+}
+
+.social-button {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  color: black;
+  position: relative;
+}
+
+.social-button:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  background-color:black;
+}
+
+.social-name {
+  font-weight: 500;
+  color: black;
+}
+
+.profileImage-container {
+  margin-left: 2rem;
+}
+
+.profileImage-container img {
+  width: 450px;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
 .github-icon {
-    width: 40px; // Passe die Größe an
+    width: 40px;
     height: 40px; 
     display: inline-block;
 }
 
 .linkedin-icon {
-    width: 35px; // Passe die Größe an
+    width: 35px;
     height: 35px;
     display: inline-block;
 }
 
-// Container für die Icons
 .svg-container {
     display: inline-flex;
     align-items: center;
