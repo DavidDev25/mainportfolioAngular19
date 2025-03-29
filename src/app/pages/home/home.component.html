@@ -15,7 +15,9 @@
       }
       
       <div class="dropdown-container">
-        <button class="social-button" [ngClass]="{'active': isDownloadDropdownOpen, 'dark-home': themeService.isDarkTheme()}">
+        <button class="social-button" 
+                [ngClass]="{'active': isDownloadDropdownOpen, 'dark-home': themeService.isDarkTheme()}"
+                (click)="toggleDownloadDropdown($event)">
           <span class="svg-container download-icon">
             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" fill="currentColor">
               <path d="M0 0h24v24H0z" fill="none"/>
@@ -25,11 +27,12 @@
           <span class="social-name">Lebenslauf</span>
         </button>
         
-        <div class="dropdown-menu" [ngClass]="{'dark-home': themeService.isDarkTheme()}">
+        <div class="dropdown-menu" [ngClass]="{'show': isDownloadDropdownOpen, 'dark-home': themeService.isDarkTheme()}">
           @for (download of downloadLabels; track download.name) {
             <a [ngClass]="{'dark-home': themeService.isDarkTheme()}" 
                class="dropdown-item" 
-               [attr.aria-label]="download.name">
+               [attr.aria-label]="download.name"
+               (click)="downloadFile($event, download)">
               <span class="download-name">{{ download.name }}</span>
             </a>
           }

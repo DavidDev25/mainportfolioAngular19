@@ -51,6 +51,7 @@
   position: relative;
   margin-right: 10px;
   height: 40px; 
+  cursor: pointer; // Hinzugefügt: Cursor-Pointer für alle social-buttons
 }
 
 .social-button:not(:last-child)::after {
@@ -234,7 +235,7 @@ button.social-button::after {
   top: 100%;
   left: 0;
   z-index: 1000;
-  display: none;
+  display: none; // Das Menü ist standardmäßig versteckt
   min-width: 180px;
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
@@ -244,7 +245,7 @@ button.social-button::after {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   
   &.show {
-    display: block;
+    display: block !important; // !important hinzugefügt, um andere Styles zu überschreiben
   }
   
   .dark-home & {
@@ -265,6 +266,7 @@ button.social-button::after {
   background-color: transparent;
   border: 0;
   text-decoration: none;
+  cursor: pointer; // Hinzugefügt: Cursor-Pointer für alle dropdown items
   
   &:hover {
     background-color: rgba(0, 0, 0, 0.05);

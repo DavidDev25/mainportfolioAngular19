@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SvgService } from '../../svg.service';
 import { SafeHtml } from '@angular/platform-browser'; 
 import { ThemeService } from '../../shared/services/theme.service';
+import { DownloadService } from '../../shared/services/download.service';
 
 // Interface für Social Links definieren
 interface SocialLink {
@@ -14,6 +15,7 @@ interface SocialLink {
 interface DownloadLabel {
   name: string;
   url: string;
+  fileName: string;
 }
 
 @Component({
@@ -25,7 +27,8 @@ interface DownloadLabel {
 })
 export class HomeComponent {
   private svgService = inject(SvgService);
-  protected themeService = inject(ThemeService); 
+  protected themeService = inject(ThemeService);
+  private downloadService = inject(DownloadService); // Neu: DownloadService injizieren
   
   // Dropdown-Status
   isDownloadDropdownOpen = false;
@@ -33,17 +36,25 @@ export class HomeComponent {
   title = 'David Werner';
   subtitle = 'Junior Web Developer';
   description = 'Mit Leidenschaft für Frontend-Entwicklung bringe ich digitale Ideen zum Leben';
-  profileImage = 'projectImages/profilimage/profilepicture.jpg';
+  profileImage = 'assets/profilepicture.jpg';
 
   socialLinks: SocialLink[] = [
     { name: 'Github', url: 'https://github.com/DavidDev25', iconName: 'Github' },
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/david-werner-01a88032a/', iconName: 'LinkedIn' }
   ];
   
-  // CV Download Options
+  // CV Download Options mit getrenntem URL und Dateinamen
   downloadLabels: DownloadLabel[] = [
-    { name: 'Lebenslauf PDF', url: 'src\downloads\Lebenslauf_IT_Support.pdf' },
-    { name: 'Lebenslauf Word', url: 'src\downloads\Lebenslauf_IT_Support.docx' }
+    { 
+      name: 'Lebenslauf PDF', 
+      url: 'assets/downloads/Lebenslauf_IT_Support.pdf',
+      fileName: 'Lebenslauf_IT_Support.pdf' 
+    },
+    { 
+      name: 'Lebenslauf Word', 
+      url: 'assets/downloads/Lebenslauf_IT_Support.docx',
+      fileName: 'Lebenslauf_IT_Support.docx' 
+    }
   ];
   
   // Toggle Dropdown
@@ -70,63 +81,15 @@ export class HomeComponent {
     }
   }
 
-  // Download-Funktion
-  downloadFile(event: Event, url: string, fileName: string): void {
+  // Neue Download-Funktion mit Service
+  downloadFile(event: Event, item: DownloadLabel): void {
     event.preventDefault();
     event.stopPropagation();
     
-    console.log(`Starting download for ${fileName} from ${url}`);
-
-    // Content-Type basierend auf Dateiendung bestimmen
-    let contentType = 'application/octet-stream'; // Default
-    if (fileName.endsWith('.pdf')) {
-      contentType = 'application/pdf';
-    } else if (fileName.endsWith('.docx')) {
-      contentType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-    }
+    // Den Service verwenden
+    this.downloadService.downloadFile(item.fileName, item.url);
     
-    // XMLHttpRequest verwenden für binäre Daten
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'blob';
-    xhr.onload = function() {
-      if (this.status === 200) {
-        console.log(`File ${fileName} fetched successfully`);
-        
-        // Direktes Verwenden des Response-Blob mit dem richtigen Content-Type
-        const blob = new Blob([this.response], { type: contentType });
-        
-        // Browser-DownloadAPI verwenden
-        const downloadUrl = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = downloadUrl;
-        link.download = fileName;
-        
-        // Link zum DOM hinzufügen und klicken
-        document.body.appendChild(link);
-        link.click();
-        
-        // Aufräumen
-        setTimeout(() => {
-          document.body.removeChild(link);
-          window.URL.revokeObjectURL(downloadUrl);
-        }, 500);
-        
-        console.log(`Download for ${fileName} initiated`);
-      } else {
-        console.error(`Error ${this.status} while fetching ${url}`);
-        alert(`Download fehlgeschlagen: HTTP error ${this.status}`);
-      }
-    };
-    
-    xhr.onerror = function() {
-      console.error(`Network error while fetching ${url}`);
-      alert('Download fehlgeschlagen: Netzwerkfehler');
-    };
-    
-    xhr.send();
-    
-    // Dropdown nach dem Download schließen
+    // Dropdown schließen
     this.isDownloadDropdownOpen = false;
   }
 }
