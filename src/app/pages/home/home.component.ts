@@ -69,4 +69,64 @@ export class HomeComponent {
       this.isDownloadDropdownOpen = false;
     }
   }
+
+  // Download-Funktion
+  downloadFile(event: Event, url: string, fileName: string): void {
+    event.preventDefault();
+    event.stopPropagation();
+    
+    console.log(`Starting download for ${fileName} from ${url}`);
+
+    // Content-Type basierend auf Dateiendung bestimmen
+    let contentType = 'application/octet-stream'; // Default
+    if (fileName.endsWith('.pdf')) {
+      contentType = 'application/pdf';
+    } else if (fileName.endsWith('.docx')) {
+      contentType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    }
+    
+    // XMLHttpRequest verwenden für binäre Daten
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'blob';
+    xhr.onload = function() {
+      if (this.status === 200) {
+        console.log(`File ${fileName} fetched successfully`);
+        
+        // Direktes Verwenden des Response-Blob mit dem richtigen Content-Type
+        const blob = new Blob([this.response], { type: contentType });
+        
+        // Browser-DownloadAPI verwenden
+        const downloadUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.download = fileName;
+        
+        // Link zum DOM hinzufügen und klicken
+        document.body.appendChild(link);
+        link.click();
+        
+        // Aufräumen
+        setTimeout(() => {
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(downloadUrl);
+        }, 500);
+        
+        console.log(`Download for ${fileName} initiated`);
+      } else {
+        console.error(`Error ${this.status} while fetching ${url}`);
+        alert(`Download fehlgeschlagen: HTTP error ${this.status}`);
+      }
+    };
+    
+    xhr.onerror = function() {
+      console.error(`Network error while fetching ${url}`);
+      alert('Download fehlgeschlagen: Netzwerkfehler');
+    };
+    
+    xhr.send();
+    
+    // Dropdown nach dem Download schließen
+    this.isDownloadDropdownOpen = false;
+  }
 }

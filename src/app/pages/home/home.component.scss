@@ -29,6 +29,8 @@
 
 .home__socials {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 0;
   padding: 15px;
   border-radius: 8px;
@@ -37,7 +39,7 @@
   display: inline-flex;
 }
 
-// Anpassung der sozialen Buttons für konsistente Abstände
+
 .social-button {
   display: flex;
   align-items: center;
@@ -47,14 +49,14 @@
   transition: background-color 0.3s;
   color: black;
   position: relative;
-  margin-right: 10px; // Abstand zwischen Buttons
+  margin-right: 10px;
+  height: 40px; 
 }
 
-// Konsistente Trennlinie für alle Buttons
 .social-button:not(:last-child)::after {
   content: '';
   position: absolute;
-  right: -5px; // Abstand zur Trennlinie
+  right: -5px; 
   top: 0;
   height: 100%;
   width: 1px;
@@ -65,7 +67,6 @@
   }
 }
 
-// Stelle sicher, dass der Download-Button keine Trennlinie hat, wenn er der letzte ist
 .social-button:last-child::after {
   content: none;
 }
@@ -131,7 +132,7 @@
   }
 
   .home__socials{
-    background-color: #1e1e2d;
+    background-color: #1e1e2d;;
     .social-name{
       color: white;
     }
@@ -142,12 +143,12 @@
   }
 }
 
-// Anpassung der dropdown-container Position
 .dropdown-container {
   position: relative;
-  display: inline-block;
-  margin: 0; // Entferne die Abstände
-}
+  display: inline-flex;
+  align-items: center;
+  height: 100%; 
+  margin: 0; }
 
 .home__socials .dropdown-container:last-child {
   margin-right: 0;
@@ -178,7 +179,6 @@
   }
 }
 
-// Spezifische Anpassung für den Download-Button
 .social-button.download-toggle {
   display: flex;
   align-items: center;
@@ -188,16 +188,13 @@
   transition: background-color 0.3s;
   color: black;
   position: relative;
-  margin-right: 0; // Kein Abstand nach rechts für den letzten Button
+  margin-right: 0; 
 }
 
-// Entferne die Trennlinie vom Lebenslauf-Button
 .social-button.download-toggle::after {
-  content: none !important;  // Mit !important um sicherzustellen, dass es andere Regeln überschreibt
+  content: none !important; 
 }
 
-// Überprüfe auch, ob der Lebenslauf-Button wirklich der letzte ist
-// Falls er nicht der letzte Button ist, aber trotzdem keine Trennlinie haben soll:
 button.social-button::after {
   content: none !important;
 }
@@ -206,6 +203,9 @@ button.social-button::after {
   width: 24px;
   height: 24px;
   margin-right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   svg {
     fill: #333;
@@ -216,7 +216,19 @@ button.social-button::after {
   }
 }
 
-// Anpassung des Dropdown-Menüs
+.dropdown-container .social-button {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  color: black;
+  position: relative;
+  margin: 0;
+  height: 100%; 
+}
+
 .dropdown-menu {
   position: absolute;
   top: 100%;
